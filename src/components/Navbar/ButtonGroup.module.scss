@@ -1,0 +1,61 @@
+@import '../../variables.scss';
+
+.buttonGroup {
+  width: 300px;
+  display: flex;
+  justify-content: space-around;
+  position: relative;
+
+  button {
+    font-size: 0.9rem;
+    border-radius: 5px;
+    height: 36px;
+    font-family: 'Lato', sans-serif;
+  }
+  .authGroup {
+    button {
+      padding: 6px 18px 8px 18px;
+    }
+  }
+  .loginButton {
+    color: white;
+    border: none;
+    border: 1px solid $button-color-blue;
+    background-color: $button-color-blue;
+  }
+  .signupButton {
+    background-color: white;
+    border: 1px solid $button-color-blue;
+    color: $button-color-blue;
+  }
+  .mycartButton {
+    font-weight: bold;
+    align-items: center;
+    display: flex;
+    color: black;
+    background-color: white;
+    padding: 6px 8px 8px 8px;
+    border: 1px solid $input-border-blue;
+  }
+  .numberLabel {
+    color: white;
+    border-radius: 3px;
+    font-size: 0.6rem;
+
+    background-color: #ff9017;
+    span {
+      padding: 5px;
+    }
+  }
+}
+.myAccount {
+  width: 100px;
+
+  color: #969696;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  span {
+    font-size: 0.8rem;
+  }
+}

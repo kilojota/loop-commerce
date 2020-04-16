@@ -1,0 +1,31 @@
+@import '../../variables.scss';
+
+.searchbar {
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+
+  justify-content: space-between;
+  height: 28px;
+  border: 1px solid $input-border-blue;
+  input {
+    outline: none;
+    width: 25em;
+    border: none;
+    margin-left: 10px;
+  }
+  .iconContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    height: 30px;
+    background-color: $button-color-blue;
+    i {
+      font-size: 0.7rem;
+      color: white;
+    }
+  }
+}
