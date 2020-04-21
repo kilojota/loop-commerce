@@ -1,7 +1,5 @@
 import storage from 'redux-persist/lib/storage'
 import { persistReducer } from 'redux-persist'
-import createReducer from './createReducer'
-
 import {
   SIGN_IN,
   SIGN_UP,
@@ -11,7 +9,7 @@ import {
   SET_LOADING,
   UNSET_LOADING,
   CLEAR_ERRORS
-} from '../actions/types'
+} from 'actions/types'
 
 const initialState = {
   user: null,
@@ -42,6 +40,14 @@ const reducer = (state = initialState, action) => {
         userSession: action.payload.userSession,
         errors: null
       }
+    case SIGN_OUT:
+      return {
+        ...state,
+        user: null,
+        userSession: null,
+        errors: null
+      }
+
     case SIGN_UP_FAILED:
     case SIGN_IN_FAILED:
       return {

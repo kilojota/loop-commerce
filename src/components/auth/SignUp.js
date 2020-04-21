@@ -1,20 +1,20 @@
 import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
-import { Link, Redirect, useLocation } from 'react-router-dom'
-import { signUp, clearErrors } from '../../actions/authActions'
-import Logo from './Logo'
-import { useForm } from 'react-hook-form'
-import { useAuthentication } from '../../hooks/auth'
-import InputForm from './InputForm'
-import SelectForm from './SelectForm'
 import { useIntl } from 'react-intl'
+import { connect } from 'react-redux'
+import { Redirect, useLocation } from 'react-router-dom'
+import { useForm } from 'react-hook-form'
+import { signUp, clearErrors } from 'actions/authActions'
+import { useAuthentication } from 'hooks/auth'
+import InputForm from './InputForm'
+import Logo from './Logo'
+import SelectForm from './SelectForm'
+import ErrorMessage from 'components/messages/ErrorMessage'
 import styles from './AuthStyles.module.scss'
-import ErrorMessage from '../messages/ErrorMessage'
 
 const SignUp = ({ signUp, clearErrors, errorsRequest, loading }) => {
   useEffect(() => {
     clearErrors()
-  }, [])
+  }, [clearErrors])
   const intl = useIntl()
   const { register, errors, handleSubmit } = useForm()
 

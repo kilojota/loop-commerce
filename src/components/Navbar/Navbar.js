@@ -1,7 +1,5 @@
 import React from 'react'
-
 import Logo from './Logo'
-
 import Searchbar from './Searchbar'
 import ButtonGroup from './ButtonGroup'
 import styles from './Navbar.module.scss'

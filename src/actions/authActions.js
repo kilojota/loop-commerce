@@ -7,8 +7,8 @@ import {
   SET_LOADING,
   UNSET_LOADING,
   CLEAR_ERRORS
-} from './types'
-import AuthService from '../api/AuthService'
+} from 'actions/types'
+import AuthService from 'api/AuthService'
 
 export const signIn = credentials => async dispatch => {
   try {

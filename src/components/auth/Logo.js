@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styles from './AuthStyles.module.scss'
+
 const Logo = ({ logoImgPath, textLogoPath, authType }) => {
   return (
     <div

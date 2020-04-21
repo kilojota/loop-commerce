@@ -1,18 +1,19 @@
-import React, { createRef, useEffect } from 'react'
+import React, { useEffect } from 'react'
+import { useForm } from 'react-hook-form'
 import { connect } from 'react-redux'
-import { Redirect, useLocation } from 'react-router-dom'
-import { signIn, clearErrors } from '../../actions/authActions'
-import { useAuthentication } from '../../hooks/auth'
 import { useIntl } from 'react-intl'
+import { Redirect, useLocation } from 'react-router-dom'
+import { signIn, clearErrors } from 'actions/authActions'
+import { useAuthentication } from 'hooks/auth'
 import Logo from './Logo'
 import InputForm from './InputForm'
-import { useForm } from 'react-hook-form'
+import ErrorMessage from 'components/messages/ErrorMessage'
 import styles from './AuthStyles.module.scss'
-import ErrorMessage from '../messages/ErrorMessage'
+
 const SignIn = ({ signIn, clearErrors, errorsRequest, loading }) => {
   useEffect(() => {
     clearErrors()
-  }, [])
+  }, [clearErrors])
   const { register, errors, handleSubmit } = useForm()
   const intl = useIntl()
   const { state } = useLocation()

@@ -26,8 +26,8 @@ export default {
     createAccount: 'Create one here',
     alreadyHaveAnAccount: 'Already have an account?',
     forgotPassword: 'Forgot password?',
-    forgotPasswordLegend:
-      'Enter your email and we’ll help you reset your password',
+    forgotYourPassword: 'Forgot your password?',
+    forgotPasswordLegend: 'Enter your email address to reset your password',
     resetPassword: 'Reset Password',
     newPassword: 'New Password',
     updatePassword: 'Update Password',

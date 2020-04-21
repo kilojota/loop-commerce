@@ -1,4 +1,4 @@
-import esESMessages from '../messages/es-ES'
+import esESMessages from 'languageProvider/messages/es-ES'
 
 const esESLanguage = {
   messages: {

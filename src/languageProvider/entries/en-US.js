@@ -1,4 +1,4 @@
-import enUSMessages from '../messages/en-US'
+import enUSMessages from 'languageProvider/messages/en-US'
 
 const enUSLanguage = {
   messages: {

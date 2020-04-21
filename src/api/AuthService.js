@@ -1,4 +1,3 @@
-import axios from 'axios'
 import axiosClient from './httpClient'
 class AuthService {
   static signUp = user => axiosClient().post('/api/v1/auth', { ...user })

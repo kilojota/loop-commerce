@@ -1,31 +1,30 @@
 import React, { useState, useEffect } from 'react'
+import { useIntl } from 'react-intl'
+import { useForm } from 'react-hook-form'
 import { connect } from 'react-redux'
 import { Redirect, useLocation } from 'react-router-dom'
-import {
-  clearErrors,
-  unsetLoading,
-  setLoading
-} from '../../actions/authActions'
-import { useAuthentication } from '../../hooks/auth'
-import { useIntl } from 'react-intl'
+import { clearErrors, unsetLoading, setLoading } from 'actions/authActions'
+import { useAuthentication } from 'hooks/auth'
+import ErrorMessage from 'components/messages/ErrorMessage'
+import SuccessMessage from 'components/messages/SuccessMessage'
 import InputForm from './InputForm'
-import { useForm } from 'react-hook-form'
+import Title from './Title'
+import AuthService from 'api/AuthService'
 import styles from './AuthStyles.module.scss'
-import ErrorMessage from '../messages/ErrorMessage'
-import SuccessMessage from '../messages/SuccessMessage'
-import AuthService from '../../api/AuthService'
+
 const ForgotPassword = ({ clearErrors, setLoading, loading, unsetLoading }) => {
-  useEffect(() => {
-    clearErrors()
-  }, [])
   let { register, errors, handleSubmit } = useForm()
   const [isResponseSuccess, setIsResponseSuccess] = useState(false)
   const [errorList, setErrorList] = useState(false)
-
   const intl = useIntl()
   const { state } = useLocation()
   const { from } = state || { from: { pathname: '/' } }
   const { isAuthenticated } = useAuthentication()
+
+  useEffect(() => {
+    clearErrors()
+  }, [clearErrors])
+
   if (isAuthenticated) {
     return <Redirect to={from} />
   }
@@ -43,6 +42,10 @@ const ForgotPassword = ({ clearErrors, setLoading, loading, unsetLoading }) => {
 
   return (
     <>
+      <Title
+        title={intl.messages['common.forgotYourPassword']}
+        subtitle={intl.messages['common.forgotPasswordLegend']}
+      />
       <form className={styles.authForm} onSubmit={handleSubmit(onSubmit)}>
         <InputForm
           ref={register({

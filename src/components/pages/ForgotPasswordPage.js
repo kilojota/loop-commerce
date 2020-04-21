@@ -1,10 +1,9 @@
 import React from 'react'
-
 import { useIntl } from 'react-intl'
-import SignIn from '../auth/SignIn'
-import Label from '../auth/Label'
-import styles from '../auth/AuthStyles.module.scss'
-import ForgotPassword from '../auth/ForgotPassword'
+import Label from 'components/auth/Label'
+import ForgotPassword from 'components/auth/ForgotPassword'
+import styles from 'components/auth/AuthStyles.module.scss'
+
 const ForgotPasswordPage = () => {
   const intl = useIntl()
 

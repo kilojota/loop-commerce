@@ -1,9 +1,9 @@
 import React from 'react'
-
 import { useIntl } from 'react-intl'
-import SignIn from '../auth/SignIn'
-import Label from '../auth/Label'
-import styles from '../auth/AuthStyles.module.scss'
+import SignIn from 'components/auth/SignIn'
+import Label from 'components/auth/Label'
+import styles from 'components/auth/AuthStyles.module.scss'
+
 const SignInPage = () => {
   const intl = useIntl()
 

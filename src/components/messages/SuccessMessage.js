@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styles from '../auth/AuthStyles.module.scss'
+import styles from 'components/auth/AuthStyles.module.scss'
 
 const SuccessMessage = ({ msgs }) => {
   return (

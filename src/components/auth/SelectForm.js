@@ -1,7 +1,8 @@
-import React, { forwardRef, useState } from 'react'
+import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import { useIntl } from 'react-intl'
 import styles from './AuthStyles.module.scss'
+
 const SelectForm = forwardRef((props, ref) => {
   const { label, errors, name, selectValues, isRequired, className } = props
   const intl = useIntl()
