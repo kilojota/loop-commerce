@@ -3,105 +3,19 @@
 html,
 body,
 #root {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   font-family: 'Lato', sans-serif;
   margin: 0;
   height: 100%;
+  background-color: $main-background-color;
 }
+
 .link {
   color: $button-color-blue;
 }
-.auth {
-  background-color: $login-background-color;
-  height: inherit;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  &__container {
-    margin-bottom: 1em;
-    background-color: white;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-      0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    padding: 2em;
-    display: flex;
-    flex-direction: column;
-    width: fit-content;
-  }
-  &__label {
-    font-weight: bold;
-    font-size: 0.9rem;
-    display: flex;
-    a {
-      text-decoration: none;
-      margin-left: 1em;
-    }
-    span {
-      margin-left: 1em;
-    }
-    margin-top: 1em;
-  }
-  &__logo {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 1em 0em 4em 0em;
-    &__text-img {
-      height: 60px;
-    }
-    &__img {
-      margin-left: 0.5em;
-      width: 150px;
-    }
-  }
-  &__form {
-    margin-top: 1em;
-    display: flex;
-    flex-direction: column;
-    &-required {
-      font-style: italic;
-      color: #9e9e9e;
-    }
-    label {
-      color: $label-form-color;
-      font-size: 0.9rem;
-      font-weight: 500;
-    }
-    input,
-    select {
-      display: -webkit-box;
-      margin-top: 0.5em;
-      text-indent: 0.5em;
-      height: 2.5em;
-      border-radius: 5px;
-      border: 1px solid $input-border-blue;
-      background-color: $input-background-blue;
-      &::placeholder {
-        font-style: italic;
-        color: $input-font-color;
-      }
-      &:focus {
-        outline: 1px solid rgb(113, 147, 240);
-      }
-    }
-  }
-  &__button {
-    &:focus {
-      outline: none;
-    }
-    &:hover {
-      background-color: #005ec3;
-      cursor: pointer;
-    }
-    text-transform: uppercase;
 
-    justify-content: center;
-    color: white;
-    margin-top: 3em;
-    border: none;
-    border-radius: 5px;
-    display: flex;
-    flex-direction: row;
-    width: auto;
-    height: 3em;
-    background-color: $button-color-blue;
-  }
+.disabled {
+  opacity: 30%;
+  pointer-events: none;
 }

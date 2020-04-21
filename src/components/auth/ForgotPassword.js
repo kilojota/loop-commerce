@@ -1,19 +1,27 @@
-import React, { createRef, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Redirect, useLocation } from 'react-router-dom'
-import { signIn, clearErrors } from '../../actions/authActions'
+import {
+  clearErrors,
+  unsetLoading,
+  setLoading
+} from '../../actions/authActions'
 import { useAuthentication } from '../../hooks/auth'
 import { useIntl } from 'react-intl'
-import Logo from './Logo'
 import InputForm from './InputForm'
 import { useForm } from 'react-hook-form'
 import styles from './AuthStyles.module.scss'
 import ErrorMessage from '../messages/ErrorMessage'
-const SignIn = ({ signIn, clearErrors, errorsRequest, loading }) => {
+import SuccessMessage from '../messages/SuccessMessage'
+import AuthService from '../../api/AuthService'
+const ForgotPassword = ({ clearErrors, setLoading, loading, unsetLoading }) => {
   useEffect(() => {
     clearErrors()
   }, [])
-  const { register, errors, handleSubmit } = useForm()
+  let { register, errors, handleSubmit } = useForm()
+  const [isResponseSuccess, setIsResponseSuccess] = useState(false)
+  const [errorList, setErrorList] = useState(false)
+
   const intl = useIntl()
   const { state } = useLocation()
   const { from } = state || { from: { pathname: '/' } }
@@ -21,14 +29,20 @@ const SignIn = ({ signIn, clearErrors, errorsRequest, loading }) => {
   if (isAuthenticated) {
     return <Redirect to={from} />
   }
-
-  const onSubmit = async data => {
-    await signIn(data)
+  const onSubmit = async ({ email }) => {
+    setLoading()
+    setIsResponseSuccess(false)
+    try {
+      await AuthService.resetPassword({ email })
+      setIsResponseSuccess(true)
+    } catch ({ errors }) {
+      setErrorList(errors)
+    }
+    unsetLoading()
   }
 
   return (
     <>
-      <Logo authType={'signIn'} />
       <form className={styles.authForm} onSubmit={handleSubmit(onSubmit)}>
         <InputForm
           ref={register({
@@ -44,31 +58,27 @@ const SignIn = ({ signIn, clearErrors, errorsRequest, loading }) => {
           placeholder={intl.messages['common.emailPlaceholder']}
           errors={errors}
         />
-        <InputForm
-          ref={register({ required: true, minLength: 8 })}
-          name='password'
-          label={intl.messages['common.password']}
-          value=''
-          type='password'
-          placeholder={intl.messages['common.passwordPlaceholder']}
-          errors={errors}
-          helpLinkPath={'/forgot-password'}
-          helpMessage={intl.messages['common.forgotPassword']}
-        />
-        {errorsRequest && <ErrorMessage msgs={errorsRequest} />}
-
+        {errorList && <ErrorMessage msgs={errorList} />}
+        {isResponseSuccess && (
+          <SuccessMessage
+            msgs={[intl.messages['common.resetPasswordSuccess']]}
+          />
+        )}
         <button
           className={`${styles.authButton} ${loading ? 'disabled' : ''}`}
           type='submit'
         >
-          <span>{intl.messages['common.login']}</span>
+          <span>{intl.messages['common.emailNewPassword']}</span>
         </button>
       </form>
     </>
   )
 }
 const mapStateToProps = state => ({
-  errorsRequest: state.auth.errors,
   loading: state.auth.loading
 })
-export default connect(mapStateToProps, { signIn, clearErrors })(SignIn)
+export default connect(mapStateToProps, {
+  clearErrors,
+  setLoading,
+  unsetLoading
+})(ForgotPassword)

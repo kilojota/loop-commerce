@@ -1,20 +1,21 @@
 import React from 'react'
 
-import SignUp from '../../components/auth/SignUp'
-import Label from '../auth/Label'
 import { useIntl } from 'react-intl'
+import SignIn from '../auth/SignIn'
+import Label from '../auth/Label'
 import styles from '../auth/AuthStyles.module.scss'
-const SignUpPage = () => {
+import ForgotPassword from '../auth/ForgotPassword'
+const ForgotPasswordPage = () => {
   const intl = useIntl()
+
   return (
     <div className={styles.auth}>
       <div className={styles.authWrapper}>
         <div className={styles.authContainer}>
-          <SignUp />
+          <ForgotPassword />
         </div>
         <Label
-          text={intl.messages['common.alreadyHaveAnAccount']}
-          linkText={intl.messages['common.signIn']}
+          linkText={intl.messages['common.returnLogin']}
           className={styles.authLabel}
           linkUrl={'/sign-in'}
         />
@@ -22,4 +23,5 @@ const SignUpPage = () => {
     </div>
   )
 }
-export default SignUpPage
+
+export default ForgotPasswordPage

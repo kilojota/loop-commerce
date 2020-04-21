@@ -1,16 +1,27 @@
-import React from 'react';
+import React from 'react'
 
-import SignIn from '../auth/SignIn';
-import Label from '../auth/Label';
-const SignInPage = () => (
-  <div className='auth'>
-    <div className='auth__wrapper'>
-      <div className='auth__container'>
-        <SignIn />
+import { useIntl } from 'react-intl'
+import SignIn from '../auth/SignIn'
+import Label from '../auth/Label'
+import styles from '../auth/AuthStyles.module.scss'
+const SignInPage = () => {
+  const intl = useIntl()
+
+  return (
+    <div className={styles.auth}>
+      <div className={styles.authWrapper}>
+        <div className={styles.authContainer}>
+          <SignIn />
+        </div>
+        <Label
+          text={intl.messages['common.dontHaveAccountQuestion']}
+          linkText={intl.messages['common.createAccount']}
+          className={styles.authLabel}
+          linkUrl={'/sign-up'}
+        />
       </div>
-      <Label text={"Don't have an account?"} linkText={'Create one here'} className={'auth__label'} linkUrl={'/sign-up'} />
     </div>
-  </div>
-);
+  )
+}
 
-export default SignInPage;
+export default SignInPage

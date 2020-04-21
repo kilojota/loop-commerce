@@ -1,20 +1,23 @@
-import React, { createRef, useState } from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Link, Redirect, useLocation } from 'react-router-dom'
-import { signUp } from '../../actions/authActions'
+import { signUp, clearErrors } from '../../actions/authActions'
 import Logo from './Logo'
+import { useForm } from 'react-hook-form'
 import { useAuthentication } from '../../hooks/auth'
-
 import InputForm from './InputForm'
 import SelectForm from './SelectForm'
+import { useIntl } from 'react-intl'
+import styles from './AuthStyles.module.scss'
+import ErrorMessage from '../messages/ErrorMessage'
 
-const SignUp = ({ signUp }) => {
-  const emailRef = createRef()
-  const firstNameRef = createRef()
-  const lastNameRef = createRef()
-  const genderRef = createRef()
-  const addressRef = createRef()
-  const passwordRef = createRef()
+const SignUp = ({ signUp, clearErrors, errorsRequest, loading }) => {
+  useEffect(() => {
+    clearErrors()
+  }, [])
+  const intl = useIntl()
+  const { register, errors, handleSubmit } = useForm()
+
   const { state } = useLocation()
   const { from } = state || { from: { pathname: '/' } }
   const { isAuthenticated } = useAuthentication()
@@ -22,88 +25,93 @@ const SignUp = ({ signUp }) => {
     return <Redirect to={from} />
   }
 
-  const onClick = async () => {
-    if (
-      emailRef.current.value.trim() === '' ||
-      emailRef.current.value.trim() === ''
-    ) {
-      console.log('Email and password are required')
-    } else {
-      await signUp({
-        email: emailRef.current.value,
-        password: passwordRef.current.value,
-        firstName: firstNameRef.current.value,
-        lastName: lastNameRef.current.value,
-        gender: genderRef.current.value,
-        address: addressRef.current.value
-      })
-    }
+  const onSubmit = async data => {
+    await signUp(data)
   }
   return (
     <>
-      <Logo />
-      <div className='auth__forms'>
+      <Logo authType={'signUp'} />
+      <form className={styles.authForm} onSubmit={handleSubmit(onSubmit)}>
         <InputForm
-          ref={emailRef}
+          ref={register({
+            required: true,
+            pattern: {
+              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+              message: intl.messages['common.emailValid']
+            }
+          })}
           name='email'
-          label='Email'
+          label={intl.messages['common.email']}
           value=''
-          type='email'
-          placeholder='Type your email'
+          type=''
+          placeholder={intl.messages['common.emailPlaceholder']}
           isRequired
+          errors={errors}
         />
         <InputForm
-          ref={firstNameRef}
-          name='firstname'
-          label='First Name'
+          ref={register({ required: true })}
+          name='firstName'
+          label={intl.messages['common.firstName']}
           value=''
           type='text'
-          placeholder='John'
+          placeholder={intl.messages['common.firstNamePlaceholder']}
           isRequired
+          errors={errors}
         />
         <InputForm
-          ref={lastNameRef}
-          name='lastname'
-          label='Last Name'
+          ref={register({ required: true })}
+          name='lastName'
+          label={intl.messages['common.lastName']}
           value=''
           type='text'
-          placeholder='Doe'
+          placeholder={intl.messages['common.lastNamePlaceholder']}
           isRequired
+          errors={errors}
         />
         <SelectForm
-          ref={genderRef}
+          ref={register({})}
           name='gender'
-          label='Gender'
+          label={intl.messages['common.gender']}
           value=''
           selectValues={[
             { value: 'placeholder', isDefault: true },
             { value: 'male' },
             { value: 'female' }
           ]}
+          errors={errors}
         />
         <InputForm
-          ref={addressRef}
+          ref={register}
           name='address'
-          label='Address'
+          label={intl.messages['common.address']}
           value=''
           type='text'
-          placeholder='123 fake street'
+          placeholder={intl.messages['common.addressPlaceholder']}
+          errors={errors}
         />
         <InputForm
-          ref={passwordRef}
+          ref={register({ required: true, minLength: 8 })}
           name='password'
-          label='Password'
+          label={intl.messages['common.password']}
           value=''
           type='password'
-          placeholder='Type your password'
+          placeholder={intl.messages['common.passwordPlaceholder']}
           isRequired
+          errors={errors}
         />
-      </div>
-      <button className='auth__button' onClick={onClick}>
-        <span>Sign Up</span>
-      </button>
+        {errorsRequest && <ErrorMessage msgs={errorsRequest} />}
+        <button
+          className={`${styles.authButton} ${loading ? 'disabled' : ''}`}
+          type='submit'
+        >
+          <span>{intl.messages['common.signUp']}</span>
+        </button>
+      </form>
     </>
   )
 }
-
-export default connect(null, { signUp })(SignUp)
+const mapStateToProps = state => ({
+  errorsRequest: state.auth.errors,
+  loading: state.auth.loading
+})
+export default connect(mapStateToProps, { signUp, clearErrors })(SignUp)

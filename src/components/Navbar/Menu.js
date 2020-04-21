@@ -9,9 +9,7 @@ import styles from './Menu.module.scss'
 const Menu = ({ isAuthenticated, redirectTo }) => {
   const dispatch = useDispatch()
 
-  const handleSignOut = () => {
-    console.log('Signing Out')
-  }
+  const handleSignOut = () => {}
 
   return (
     <div className={styles.menu}>
