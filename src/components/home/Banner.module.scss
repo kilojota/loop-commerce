@@ -1,0 +1,80 @@
+.bannerContainer {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-rows: 260px 130px;
+}
+.banner {
+  display: flex;
+  background-color: white;
+  border-radius: 15px;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.bannerImgContainer {
+  img {
+    width: 300px;
+  }
+}
+
+.bannerTitle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  h1 {
+    font-size: 42px;
+    margin: 0;
+  }
+}
+
+.bannerTouchbarText {
+  word-spacing: 5px;
+  font-size: 36px;
+  color: #5a5a5a;
+}
+
+.items {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+
+  grid-gap: 20px;
+}
+
+.item {
+  padding: 20px;
+  display: flex;
+  background-color: white;
+  border-radius: 10px;
+}
+.itemsIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+}
+.itemsTextContainer {
+  width: 250px;
+  padding-left: 20px;
+}
+.itemsTitle {
+  font-weight: bold;
+  font-size: 17px;
+  margin: 0px 0px 9px 0px;
+}
+.itemsDesc {
+  width: 250px;
+}
+.redBg {
+  background-color: #ffe2e8;
+  color: red;
+}
+.blueBg {
+  background-color: #dee7f5;
+  color: blue;
+}
+.greenBg {
+  background-color: #e3fbeb;
+  color: green;
+}
