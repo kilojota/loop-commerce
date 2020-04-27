@@ -13,14 +13,14 @@ const SelectForm = forwardRef((props, ref) => {
   return (
     <div className={errors[name] ? `${className} ${styles.formError}` : className}>
       <label>
-        {label}
-        {isRequired && <span className={className + '-required'}> (required)</span>}
+        <span className={styles.authFormLabel}>{label}</span>
+        {isRequired && <span className={styles.labelRequired}> ({intl.messages['common.required']})</span>}
       </label>
       <select ref={ref} name={name} className={className}>
         {selectValues &&
           selectValues.map((value_) => (
             <option key={value_.value} value={value_.value}>
-              {intl.messages[`common.gender${capitalize(value_.value)}`]}
+              {intl.messages[`signUp.gender${capitalize(value_.value)}`]}
             </option>
           ))}
       </select>

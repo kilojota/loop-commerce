@@ -33,6 +33,7 @@ const ForgotPassword = ({ clearErrors, setLoading, loading, unsetLoading }) => {
   }
   const onSubmit = async ({ email }) => {
     setLoading();
+    setErrorList(false);
     setIsResponseSuccess(false);
     try {
       await AuthService.resetPassword({ email });
@@ -45,7 +46,7 @@ const ForgotPassword = ({ clearErrors, setLoading, loading, unsetLoading }) => {
 
   return (
     <>
-      <Title title={intl.messages['common.forgotYourPassword']} subtitle={intl.messages['common.forgotPasswordLegend']} />
+      <Title title={intl.messages['forgotPassword.forgotYourPassword']} subtitle={intl.messages['forgotPassword.forgotPasswordLegend']} />
       <form className={styles.authForm} onSubmit={handleSubmit(onSubmit)}>
         <InputForm
           ref={register({
@@ -62,9 +63,9 @@ const ForgotPassword = ({ clearErrors, setLoading, loading, unsetLoading }) => {
           errors={errors}
         />
         {errorList && <ErrorMessage msgs={errorList} />}
-        {isResponseSuccess && <SuccessMessage msgs={[intl.messages['common.resetPasswordSuccess']]} />}
+        {isResponseSuccess && <SuccessMessage msgs={[intl.messages['forgotPassword.resetPasswordSuccess']]} />}
         <button className={`${styles.authButton} ${loading ? 'disabled' : ''}`} type='submit'>
-          <span>{intl.messages['common.emailNewPassword']}</span>
+          <span>{intl.messages['forgotPassword.emailNewPassword']}</span>
         </button>
       </form>
     </>

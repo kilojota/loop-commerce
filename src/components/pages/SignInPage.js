@@ -15,7 +15,7 @@ const SignInPage = () => {
         <div className={styles.authContainer}>
           <SignIn />
         </div>
-        <Label text={intl.messages['common.dontHaveAccountQuestion']} linkText={intl.messages['common.createAccount']} className={styles.authLabel} linkUrl={'/sign-up'} />
+        <Label text={intl.messages['signIn.dontHaveAccountQuestion']} linkText={intl.messages['signIn.createAccount']} className={styles.authLabel} linkUrl={'/sign-up'} />
       </div>
     </div>
   );

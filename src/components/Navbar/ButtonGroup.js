@@ -23,7 +23,7 @@ const ButtonGroup = () => {
 
           <div className={styles.myAccount} onClick={() => setShowingMenu(!showingMenu)}>
             <i className='fas fa-user'></i>
-            <span>My account</span>
+            <span>{intl.messages['common.myAccount']}</span>
           </div>
         </>
       ) : (
@@ -42,7 +42,7 @@ const ButtonGroup = () => {
       )}
 
       <button className={styles.mycartButton}>
-        <span>My Cart</span>
+        <span>{intl.messages['common.myCart']}</span>
 
         <span className={styles.numberLabel}>4</span>
       </button>

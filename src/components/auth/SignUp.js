@@ -52,14 +52,14 @@ const SignUp = ({ signUp, clearErrors, errorsRequest, loading }) => {
           isRequired
           errors={errors}
         />
-        <InputForm ref={register({ required: true })} name='firstName' label={intl.messages['common.firstName']} value='' type='text' placeholder={intl.messages['common.firstNamePlaceholder']} isRequired errors={errors} />
-        <InputForm ref={register({ required: true })} name='lastName' label={intl.messages['common.lastName']} value='' type='text' placeholder={intl.messages['common.lastNamePlaceholder']} isRequired errors={errors} />
-        <SelectForm ref={register({})} name='gender' label={intl.messages['common.gender']} value='' selectValues={[{ value: 'placeholder', isDefault: true }, { value: 'male' }, { value: 'female' }]} errors={errors} />
-        <InputForm ref={register} name='address' label={intl.messages['common.address']} value='' type='text' placeholder={intl.messages['common.addressPlaceholder']} errors={errors} />
+        <InputForm ref={register({ required: true })} name='firstName' label={intl.messages['signUp.firstName']} value='' type='text' placeholder={intl.messages['signUp.firstNamePlaceholder']} isRequired errors={errors} />
+        <InputForm ref={register({ required: true })} name='lastName' label={intl.messages['signUp.lastName']} value='' type='text' placeholder={intl.messages['signUp.lastNamePlaceholder']} isRequired errors={errors} />
+        <SelectForm ref={register} name='gender' label={intl.messages['signUp.gender']} value='' selectValues={[{ value: 'placeholder', isDefault: true }, { value: 'male' }, { value: 'female' }]} errors={errors} />
+        <InputForm ref={register} name='address' label={intl.messages['signUp.address']} value='' type='text' placeholder={intl.messages['signUp.addressPlaceholder']} errors={errors} />
         <InputForm ref={register({ required: true, minLength: 8 })} name='password' label={intl.messages['common.password']} value='' type='password' placeholder={intl.messages['common.passwordPlaceholder']} isRequired errors={errors} />
         {errorsRequest && <ErrorMessage msgs={errorsRequest} />}
         <button className={`${styles.authButton} ${loading ? 'disabled' : ''}`} type='submit'>
-          <span>{intl.messages['common.signUp']}</span>
+          <span>{intl.messages['signUp.signUp']}</span>
         </button>
       </form>
     </>
