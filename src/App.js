@@ -8,7 +8,9 @@ import flatten from 'flat';
 
 import ProtectedRoutes from 'components/routes/ProtectedRoutes';
 import AppLocale from 'languageProvider';
+
 import 'App.scss';
+
 const ForgotPasswordPage = lazy(() => import('components/pages/ForgotPasswordPage'));
 const SignInPage = lazy(() => import('components/pages/SignInPage'));
 const SignUpPage = lazy(() => import('components/pages/SignUpPage'));
