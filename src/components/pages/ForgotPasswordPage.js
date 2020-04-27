@@ -1,11 +1,13 @@
-import React from 'react'
-import { useIntl } from 'react-intl'
-import Label from 'components/auth/Label'
-import ForgotPassword from 'components/auth/ForgotPassword'
-import styles from 'components/auth/AuthStyles.module.scss'
+import React from 'react';
+import { useIntl } from 'react-intl';
+
+import Label from 'components/auth/Label';
+import ForgotPassword from 'components/auth/ForgotPassword';
+
+import styles from 'components/auth/AuthStyles.module.scss';
 
 const ForgotPasswordPage = () => {
-  const intl = useIntl()
+  const intl = useIntl();
 
   return (
     <div className={styles.auth}>
@@ -13,14 +15,10 @@ const ForgotPasswordPage = () => {
         <div className={styles.authContainer}>
           <ForgotPassword />
         </div>
-        <Label
-          linkText={intl.messages['common.returnLogin']}
-          className={styles.authLabel}
-          linkUrl={'/sign-in'}
-        />
+        <Label linkText={intl.messages['common.returnLogin']} className={styles.authLabel} linkUrl={'/sign-in'} />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ForgotPasswordPage
+export default ForgotPasswordPage;

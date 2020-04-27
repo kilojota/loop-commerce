@@ -1,5 +1,6 @@
-import React from 'react'
-import styles from './Searchbar.module.scss'
+import React from 'react';
+
+import styles from './Searchbar.module.scss';
 
 const Searchbar = () => (
   <div className={styles.searchbar}>
@@ -8,6 +9,6 @@ const Searchbar = () => (
       <i className='fas fa-search'></i>
     </div>
   </div>
-)
+);
 
-export default Searchbar
+export default Searchbar;

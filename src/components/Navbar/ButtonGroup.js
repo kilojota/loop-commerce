@@ -1,32 +1,27 @@
-import React, { useState } from 'react'
-import { useIntl } from 'react-intl'
-import { Link, useHistory } from 'react-router-dom'
-import { useAuthentication } from 'hooks/auth'
-import Menu from './Menu'
-import styles from './ButtonGroup.module.scss'
+import React, { useState } from 'react';
+import { useIntl } from 'react-intl';
+
+import { Link, useHistory } from 'react-router-dom';
+import { useAuthentication } from 'hooks/auth';
+
+import Menu from './Menu';
+
+import styles from './ButtonGroup.module.scss';
 
 const ButtonGroup = () => {
-  const history = useHistory()
-  const handleRedirectTo = path => history.push(path)
+  const history = useHistory();
+  const handleRedirectTo = (path) => history.push(path);
+  const { isAuthenticated } = useAuthentication();
+  const [showingMenu, setShowingMenu] = useState(false);
+  const intl = useIntl();
 
-  const { isAuthenticated } = useAuthentication()
-  const intl = useIntl()
-  const [showingMenu, setShowingMenu] = useState(false)
   return (
     <div className={styles.buttonGroup}>
       {isAuthenticated ? (
         <>
-          {showingMenu && (
-            <Menu
-              isAuthenticated={isAuthenticated}
-              redirectTo={handleRedirectTo}
-            />
-          )}
+          {showingMenu && <Menu isAuthenticated={isAuthenticated} redirectTo={handleRedirectTo} />}
 
-          <div
-            className={styles.myAccount}
-            onClick={() => setShowingMenu(!showingMenu)}
-          >
+          <div className={styles.myAccount} onClick={() => setShowingMenu(!showingMenu)}>
             <i className='fas fa-user'></i>
             <span>My account</span>
           </div>
@@ -52,7 +47,7 @@ const ButtonGroup = () => {
         <span className={styles.numberLabel}>4</span>
       </button>
     </div>
-  )
-}
+  );
+};
 
-export default ButtonGroup
+export default ButtonGroup;

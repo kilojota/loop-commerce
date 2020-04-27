@@ -1,49 +1,43 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { signOut } from 'actions/authActions'
-import Button from './Button'
-import styles from './Menu.module.scss'
+import React from 'react';
+import PropTypes from 'prop-types';
+
+import { connect } from 'react-redux';
+import { signOut } from 'actions/authActions';
+
+import Button from './Button';
+
+import styles from './Menu.module.scss';
 
 const Menu = ({ isAuthenticated, redirectTo, signOut }) => {
   const handleSignOut = () => {
-    signOut()
-  }
+    signOut();
+  };
 
   return (
     <div className={styles.menu}>
       {isAuthenticated ? (
         <>
-          <Button
-            formattedMessageId='common.accountSettings'
-            onClick={() => redirectTo('/settings')}
-          />
+          <Button formattedMessageId='common.accountSettings' onClick={() => redirectTo('/settings')} />
           <Button formattedMessageId='common.signOut' onClick={handleSignOut} />
         </>
       ) : (
         <>
-          <Button
-            formattedMessageId='common.signIn'
-            onClick={() => redirectTo('/sign-in')}
-          />
-          <Button
-            formattedMessageId='common.signUp'
-            onClick={() => redirectTo('/sign-up')}
-          />
+          <Button formattedMessageId='common.signIn' onClick={() => redirectTo('/sign-in')} />
+          <Button formattedMessageId='common.signUp' onClick={() => redirectTo('/sign-up')} />
         </>
       )}
     </div>
-  )
-}
+  );
+};
 
 Menu.propTypes = {
   isAuthenticated: PropTypes.bool,
-  redirectTo: PropTypes.func
-}
+  redirectTo: PropTypes.func,
+};
 
 Menu.defaultProps = {
   isAuthenticated: false,
-  redirectTo: () => {}
-}
+  redirectTo: () => {},
+};
 
-export default connect(null, { signOut })(Menu)
+export default connect(null, { signOut })(Menu);

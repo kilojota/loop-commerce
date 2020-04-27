@@ -1,8 +1,10 @@
-import React from 'react'
-import Logo from './Logo'
-import Searchbar from './Searchbar'
-import ButtonGroup from './ButtonGroup'
-import styles from './Navbar.module.scss'
+import React from 'react';
+
+import Logo from './Logo';
+import Searchbar from './Searchbar';
+import ButtonGroup from './ButtonGroup';
+
+import styles from './Navbar.module.scss';
 
 const Navbar = () => (
   <navbar className={styles.navbar}>
@@ -12,6 +14,6 @@ const Navbar = () => (
       <ButtonGroup />
     </div>
   </navbar>
-)
+);
 
-export default Navbar
+export default Navbar;
