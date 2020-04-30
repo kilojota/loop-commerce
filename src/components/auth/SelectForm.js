@@ -1,42 +1,49 @@
-import React, { forwardRef, useState } from 'react'
-import PropTypes from 'prop-types'
-const SelectForm = forwardRef((props, ref) => {
-  const { label, name, selectValues, isRequired, className } = props
+import React, { forwardRef } from 'react';
+import PropTypes from 'prop-types';
+import { useIntl } from 'react-intl';
 
-  const capitalize = string => string.charAt(0).toUpperCase() + string.slice(1)
+import styles from './AuthStyles.module.scss';
+
+const SelectForm = forwardRef((props, ref) => {
+  const { label, errors, name, selectValues, isRequired, className } = props;
+  const intl = useIntl();
+
+  const capitalize = (string) => string.charAt(0).toUpperCase() + string.slice(1);
+
   return (
-    <div className={className}>
+    <div className={errors[name] ? `${className} ${styles.formError}` : className}>
       <label>
-        {label}
-        {isRequired && (
-          <span className={className + '-required'}> (required)</span>
-        )}
+        <span className={styles.authFormLabel}>{label}</span>
+        {isRequired && <span className={styles.labelRequired}> ({intl.messages['common.required']})</span>}
       </label>
       <select ref={ref} name={name} className={className}>
         {selectValues &&
-          selectValues.map(value_ => (
+          selectValues.map((value_) => (
             <option key={value_.value} value={value_.value}>
-              {name + capitalize(value_.value)}
+              {intl.messages[`signUp.gender${capitalize(value_.value)}`]}
             </option>
           ))}
       </select>
+      {errors[name] && errors[name].type === 'required' && <span className={styles.labelError}>{intl.messages[`common.${name}Required`]}</span>}
+
+      {errors[name] && errors[name].type === 'pattern' && <span className={styles.labelError}>{intl.messages[`common.${name}Invalid`]}</span>}
     </div>
-  )
-})
+  );
+});
 
 SelectForm.defaultProps = {
   selectValues: [],
   label: '',
   name: '',
   isRequired: false,
-  className: 'auth__form'
-}
+  className: styles.authForm,
+};
 SelectForm.propTypes = {
   selectValues: PropTypes.array.isRequired,
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   isRequired: PropTypes.bool.isRequired,
-  className: PropTypes.string.isRequired
-}
+  className: PropTypes.string.isRequired,
+};
 
-export default SelectForm
+export default SelectForm;

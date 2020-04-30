@@ -8,11 +8,7 @@ const ProtectedRoute = ({ children, ...rest }) => {
   const location = useLocation();
   const { isAuthenticated } = useAuthentication();
 
-  return isAuthenticated ? (
-    <Route {...rest}>{children}</Route>
-  ) : (
-    <Redirect to={{ pathname: '/sign-in', state: { from: location } }} />
-  );
+  return isAuthenticated ? <Route {...rest}>{children}</Route> : <Redirect to={{ pathname: '/sign-in', state: { from: location } }} />;
 };
 
 ProtectedRoute.propTypes = {

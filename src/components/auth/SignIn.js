@@ -1,60 +1,66 @@
-import React, { createRef } from 'react'
-import { connect } from 'react-redux'
-import { Redirect, useLocation } from 'react-router-dom'
-import { signIn } from '../../actions/authActions'
-import { useAuthentication } from '../../hooks/auth'
-import Logo from './Logo'
-import InputForm from './InputForm'
+import React, { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { connect } from 'react-redux';
+import { useIntl } from 'react-intl';
+import { Redirect, useLocation } from 'react-router-dom';
 
-const SignIn = ({ signIn }) => {
-  const emailRef = createRef()
-  const passwordRef = createRef()
-  const { state } = useLocation()
-  const { from } = state || { from: { pathname: '/' } }
-  const { isAuthenticated } = useAuthentication()
+import { signIn, clearErrors } from 'actions/authActions';
+import { useAuthentication } from 'hooks/auth';
+
+import Logo from './Logo';
+import InputForm from './InputForm';
+import ErrorMessage from 'components/messages/ErrorMessage';
+
+import styles from './AuthStyles.module.scss';
+
+const SignIn = ({ signIn, clearErrors, errorsRequest, loading }) => {
+  const { register, errors, handleSubmit } = useForm();
+  const intl = useIntl();
+  const { state } = useLocation();
+  const { from } = state || { from: { pathname: '/' } };
+  const { isAuthenticated } = useAuthentication();
+
+  useEffect(() => {
+    clearErrors();
+  }, [clearErrors]);
+
   if (isAuthenticated) {
-    return <Redirect to={from} />
+    return <Redirect to={from} />;
   }
 
-  const onClick = async () => {
-    if (
-      emailRef.current.value.trim() === '' ||
-      emailRef.current.value.trim() === ''
-    ) {
-      console.log('Email and password are required')
-    } else {
-      await signIn({
-        email: emailRef.current.value,
-        password: passwordRef.current.value
-      })
-    }
-  }
+  const onSubmit = async (data) => {
+    await signIn(data);
+  };
+
   return (
     <>
-      <Logo />
-      <div className='auth__forms'>
+      <Logo authType={'signIn'} />
+      <form className={styles.authForm} onSubmit={handleSubmit(onSubmit)}>
         <InputForm
-          ref={emailRef}
+          ref={register({
+            required: true,
+            pattern: {
+              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+            },
+          })}
           name='email'
-          label='Email'
+          label={intl.messages['common.email']}
           value=''
-          type='email'
-          placeholder='Type your email'
+          placeholder={intl.messages['common.emailPlaceholder']}
+          errors={errors}
         />
-        <InputForm
-          ref={passwordRef}
-          name='password'
-          label='Password'
-          value=''
-          type='password'
-          placeholder='Type your password'
-        />
-      </div>
-      <button className='auth__button' onClick={onClick}>
-        <span>Sign In</span>
-      </button>
-    </>
-  )
-}
+        <InputForm ref={register({ required: true, minLength: 8 })} name='password' label={intl.messages['common.password']} value='' type='password' placeholder={intl.messages['common.passwordPlaceholder']} errors={errors} helpLinkPath={'/forgot-password'} helpMessage={intl.messages['common.forgotPassword']} />
+        {errorsRequest && <ErrorMessage msgs={errorsRequest} />}
 
-export default connect(null, { signIn })(SignIn)
+        <button className={`${styles.authButton} ${loading ? 'disabled' : ''}`} type='submit'>
+          <span>{intl.messages['signIn.login']}</span>
+        </button>
+      </form>
+    </>
+  );
+};
+const mapStateToProps = (state) => ({
+  errorsRequest: state.auth.errors,
+  loading: state.auth.loading,
+});
+export default connect(mapStateToProps, { signIn, clearErrors })(SignIn);

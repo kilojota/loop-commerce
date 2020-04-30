@@ -1,109 +1,72 @@
-import React, { createRef, useState } from 'react'
-import { connect } from 'react-redux'
-import { Link, Redirect, useLocation } from 'react-router-dom'
-import { signUp } from '../../actions/authActions'
-import Logo from './Logo'
-import { useAuthentication } from '../../hooks/auth'
+import React, { useEffect } from 'react';
+import { useIntl } from 'react-intl';
+import { connect } from 'react-redux';
+import { Redirect, useLocation } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 
-import InputForm from './InputForm'
-import SelectForm from './SelectForm'
+import { signUp, clearErrors } from 'actions/authActions';
+import { useAuthentication } from 'hooks/auth';
 
-const SignUp = ({ signUp }) => {
-  const emailRef = createRef()
-  const firstNameRef = createRef()
-  const lastNameRef = createRef()
-  const genderRef = createRef()
-  const addressRef = createRef()
-  const passwordRef = createRef()
-  const { state } = useLocation()
-  const { from } = state || { from: { pathname: '/' } }
-  const { isAuthenticated } = useAuthentication()
+import InputForm from './InputForm';
+import Logo from './Logo';
+import SelectForm from './SelectForm';
+import ErrorMessage from 'components/messages/ErrorMessage';
+
+import styles from './AuthStyles.module.scss';
+
+const SignUp = ({ signUp, clearErrors, errorsRequest, loading }) => {
+  const intl = useIntl();
+  const { register, errors, handleSubmit } = useForm();
+  const { state } = useLocation();
+  const { from } = state || { from: { pathname: '/' } };
+  const { isAuthenticated } = useAuthentication();
+
+  useEffect(() => {
+    clearErrors();
+  }, [clearErrors]);
+
   if (isAuthenticated) {
-    return <Redirect to={from} />
+    return <Redirect to={from} />;
   }
 
-  const onClick = async () => {
-    if (
-      emailRef.current.value.trim() === '' ||
-      emailRef.current.value.trim() === ''
-    ) {
-      console.log('Email and password are required')
-    } else {
-      await signUp({
-        email: emailRef.current.value,
-        password: passwordRef.current.value,
-        firstName: firstNameRef.current.value,
-        lastName: lastNameRef.current.value,
-        gender: genderRef.current.value,
-        address: addressRef.current.value
-      })
-    }
-  }
+  const onSubmit = async (data) => {
+    await signUp(data);
+  };
   return (
     <>
-      <Logo />
-      <div className='auth__forms'>
+      <Logo authType={'signUp'} />
+      <form className={styles.authForm} onSubmit={handleSubmit(onSubmit)}>
         <InputForm
-          ref={emailRef}
+          ref={register({
+            required: true,
+            pattern: {
+              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+              message: intl.messages['common.emailValid'],
+            },
+          })}
           name='email'
-          label='Email'
+          label={intl.messages['common.email']}
           value=''
-          type='email'
-          placeholder='Type your email'
+          type=''
+          placeholder={intl.messages['common.emailPlaceholder']}
           isRequired
+          errors={errors}
         />
-        <InputForm
-          ref={firstNameRef}
-          name='firstname'
-          label='First Name'
-          value=''
-          type='text'
-          placeholder='John'
-          isRequired
-        />
-        <InputForm
-          ref={lastNameRef}
-          name='lastname'
-          label='Last Name'
-          value=''
-          type='text'
-          placeholder='Doe'
-          isRequired
-        />
-        <SelectForm
-          ref={genderRef}
-          name='gender'
-          label='Gender'
-          value=''
-          selectValues={[
-            { value: 'placeholder', isDefault: true },
-            { value: 'male' },
-            { value: 'female' }
-          ]}
-        />
-        <InputForm
-          ref={addressRef}
-          name='address'
-          label='Address'
-          value=''
-          type='text'
-          placeholder='123 fake street'
-        />
-        <InputForm
-          ref={passwordRef}
-          name='password'
-          label='Password'
-          value=''
-          type='password'
-          placeholder='Type your password'
-          isRequired
-        />
-      </div>
-      <button className='auth__button' onClick={onClick}>
-        <span>Sign Up</span>
-      </button>
+        <InputForm ref={register({ required: true })} name='firstName' label={intl.messages['signUp.firstName']} value='' type='text' placeholder={intl.messages['signUp.firstNamePlaceholder']} isRequired errors={errors} />
+        <InputForm ref={register({ required: true })} name='lastName' label={intl.messages['signUp.lastName']} value='' type='text' placeholder={intl.messages['signUp.lastNamePlaceholder']} isRequired errors={errors} />
+        <SelectForm ref={register} name='gender' label={intl.messages['signUp.gender']} value='' selectValues={[{ value: 'placeholder', isDefault: true }, { value: 'male' }, { value: 'female' }]} errors={errors} />
+        <InputForm ref={register} name='address' label={intl.messages['signUp.address']} value='' type='text' placeholder={intl.messages['signUp.addressPlaceholder']} errors={errors} />
+        <InputForm ref={register({ required: true, minLength: 8 })} name='password' label={intl.messages['common.password']} value='' type='password' placeholder={intl.messages['common.passwordPlaceholder']} isRequired errors={errors} />
+        {errorsRequest && <ErrorMessage msgs={errorsRequest} />}
+        <button className={`${styles.authButton} ${loading ? 'disabled' : ''}`} type='submit'>
+          <span>{intl.messages['signUp.signUp']}</span>
+        </button>
+      </form>
     </>
-  )
-}
-
-export default connect(null, { signUp })(SignUp)
+  );
+};
+const mapStateToProps = (state) => ({
+  errorsRequest: state.auth.errors,
+  loading: state.auth.loading,
+});
+export default connect(mapStateToProps, { signUp, clearErrors })(SignUp);

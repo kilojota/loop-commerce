@@ -1,8 +1,8 @@
 import axios from 'axios'
 import humps from 'humps'
 
-import { signOut } from '../actions/authActions'
-import store from '../store'
+import { signOut } from 'actions/authActions'
+import { store } from 'store'
 
 const axiosClient = () => {
   const { userSession } = store.getState().auth

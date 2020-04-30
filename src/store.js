@@ -1,12 +1,13 @@
-import { createStore, applyMiddleware } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import thunk from 'redux-thunk';
-import rootReducer from './reducers';
+import { applyMiddleware, createStore } from 'redux'
+import { composeWithDevTools } from 'redux-devtools-extension'
+import { persistStore } from 'redux-persist'
+import thunk from 'redux-thunk'
+import promise from 'redux-promise-middleware'
 
-const initialState = {};
+import rootReducer from './reducers'
 
-const middleware = [thunk];
+const middleware = [thunk, promise]
+const enhancers = composeWithDevTools(applyMiddleware(...middleware))
 
-const store = createStore(rootReducer, initialState, composeWithDevTools(applyMiddleware(...middleware)));
-
-export default store;
+export const store = createStore(rootReducer, enhancers)
+export const persistor = persistStore(store)

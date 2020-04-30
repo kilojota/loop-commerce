@@ -4,9 +4,9 @@ import styles from './Searchbar.module.scss';
 
 const Searchbar = () => (
   <div className={styles.searchbar}>
-    <input type="text" placeholder="Search" />
+    <input type='text' placeholder='Search' />
     <div className={styles.iconContainer}>
-      <i className="fas fa-search"></i>
+      <i className='fas fa-search'></i>
     </div>
   </div>
 );

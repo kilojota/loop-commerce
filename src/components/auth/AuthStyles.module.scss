@@ -1,0 +1,187 @@
+@import '../../variables.scss';
+
+.auth {
+  background-color: $login-background-color;
+  height: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.authContainer {
+  margin-bottom: 1em;
+  background-color: white;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
+
+.authLabel {
+  font-weight: 600;
+  font-size: 0.8rem;
+  display: flex;
+
+  a {
+    margin-left: 0.5em;
+    text-decoration: none;
+  }
+
+  margin-top: 1.5em;
+}
+
+.inputLabelHelper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.labelLink {
+  color: $button-color-blue;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.7rem;
+}
+
+.authForm {
+  margin-top: 1em;
+  display: flex;
+  flex-direction: column;
+  .authFormLabel {
+    font-weight: 700;
+  }
+  label {
+    color: $label-form-color;
+    font-size: 0.8rem;
+  }
+  input,
+  select {
+    display: -webkit-box;
+    margin-top: 0.5em;
+    text-indent: 0.5em;
+    height: 2.5em;
+    border-radius: 5px;
+    border: 1px solid $input-border-blue;
+    background-color: $input-background-blue;
+    &::placeholder {
+      font-style: italic;
+      color: $input-font-color;
+    }
+    &:focus {
+      outline: 1px solid rgb(113, 147, 240);
+    }
+  }
+}
+
+.formError {
+  input,
+  select {
+    border: 1px solid $form-error-color;
+    background-color: $form-error-background;
+    &::placeholder {
+      font-style: italic;
+      color: $form-error-placeholder-color;
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+.labelError {
+  margin-top: 0.5em;
+  font-size: 0.7rem;
+  color: $form-error-color;
+}
+
+.labelRequired {
+  font-style: italic;
+  color: #9e9e9e;
+}
+
+.authButton {
+  &:focus {
+    outline: none;
+  }
+  &:hover {
+    background-color: #005ec3;
+    cursor: pointer;
+  }
+  text-transform: uppercase;
+
+  justify-content: center;
+  color: white;
+  margin-top: 3em;
+  border: none;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 3em;
+  background-color: $button-color-blue;
+}
+
+.authLogo {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 1em 0em 0.5em 0em;
+}
+
+.pdBottom {
+  padding: 1em 0em 3em 0em;
+}
+
+.authLogoTextImg {
+  height: 60px;
+}
+
+.authLogoImg {
+  margin-left: 0.5em;
+  width: 150px;
+}
+
+.msg {
+  font-weight: 600;
+  margin-top: 1em;
+  font-size: 0.7rem;
+  align-items: center;
+  border-radius: 5px;
+  padding: 5px;
+  display: flex;
+
+  > .msgContainer {
+    margin: 3.5px 5px 3.5px 15px;
+  }
+  i {
+    font-size: 1rem;
+    margin-left: 10px;
+  }
+}
+
+.msgContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.errorMsg {
+  color: red;
+  border: 1px solid #e53e3e;
+  background-color: #feeaea;
+}
+
+.successMsg {
+  color: green;
+  border: 1px solid #3ee55a;
+  background-color: #defbda;
+}
+
+.resetPasswordTitle {
+  width: 250px;
+
+  h2 {
+    margin-bottom: 0.5em;
+
+    font-weight: 700;
+  }
+}
