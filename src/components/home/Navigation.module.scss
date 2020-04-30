@@ -1,0 +1,49 @@
+@import 'variables.scss';
+
+.navigation {
+  padding-top: 40px;
+  padding-bottom: 200px;
+  display: flex;
+  justify-content: flex-end;
+}
+.navigationContainer {
+  font-weight: bold;
+  font-size: 0.9em;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  padding: 0px 20px 0px 20px;
+  height: 30px;
+  border-radius: 5px;
+  border: 1px solid #b9b9b9;
+}
+.navigationNumberContainer {
+  user-select: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border-right: 1px solid #b9b9b9;
+  height: 100%;
+}
+.navigationNumber {
+  padding: 0px 15px 0px 15px;
+}
+
+.navigationPreviousNumber {
+  padding: 0px 20px 0px 0px;
+}
+
+.navigationNextNumber {
+  border: none;
+  padding: 0px 0px 0px 20px;
+}
+
+.isActive {
+  background-color: $button-color-blue;
+  color: white;
+}
+.disabled {
+  cursor: default;
+  color: gray;
+  pointer-events: none;
+}

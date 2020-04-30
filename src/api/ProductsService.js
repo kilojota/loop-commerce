@@ -1,6 +1,8 @@
-import axiosClient from './httpClient'
+import axiosClient from './httpClient';
 class ProductService {
-  static getProducts = () => axiosClient().get('/api/v1/products')
+  static getProducts = (pageNumber) => axiosClient().get(`/api/v1/products?page=${pageNumber}`);
+
+  static getProductByName = (name) => axiosClient().get(`/api/v1/products?filter=${name}`);
 }
 
-export default ProductService
+export default ProductService;

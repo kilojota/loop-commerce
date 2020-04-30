@@ -1,0 +1,153 @@
+@import 'variables.scss';
+
+.arrivals {
+  margin-top: 100px;
+}
+.arrivalsProducts {
+  margin-top: 2em;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: repeat(2, 347px);
+  grid-gap: 20px;
+  img {
+    width: 200px;
+  }
+}
+.arrivalsProduct {
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  background-color: white;
+}
+.arrivalsProductImgContainer {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid $input-border-blue;
+}
+.arrivalsProductCombo {
+  padding: 8px 20px 8px 20px;
+  display: flex;
+  flex-direction: column;
+}
+.arrivalsProductTitle {
+  a {
+    color: inherit;
+    text-decoration: inherit;
+  }
+}
+.btnAddCartContainer {
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  button {
+    cursor: pointer;
+    border: none;
+    color: white;
+    background-color: $button-color-blue;
+    font-weight: 600;
+    padding: 8px 16px 8px 16px;
+    border-radius: 6px;
+    height: 35px;
+  }
+}
+.arrivalsProductPrice {
+  font-weight: bold;
+}
+.spinnerContainer {
+  margin-top: 3em;
+  display: flex;
+  justify-content: center;
+}
+.spinner {
+  animation: rotation 1s infinite linear;
+}
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+.productDetailContainer {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  border-radius: 5px;
+  background-color: white;
+  height: 500px;
+  padding-top: 30px;
+}
+.productInfo {
+  height: inherit;
+  padding-top: 1.5em;
+}
+
+.imgContainer {
+  width: 400px;
+}
+.productTitle {
+  font-weight: 600;
+  font-size: 3rem;
+}
+.productPrice {
+  font-size: 1.5rem;
+  padding-top: 1.5em;
+}
+.priceSpan {
+  font-weight: bold;
+}
+.perUnit {
+  margin-left: 0.7em;
+  font-weight: 200;
+  font-size: 1.5rem;
+  color: $per-unit-color;
+}
+
+.productDesc {
+  font-size: 1.1rem;
+  padding-top: 2em;
+  color: $product-desc-color;
+}
+.navigation {
+  padding-top: 40px;
+  padding-bottom: 200px;
+  display: flex;
+  justify-content: flex-end;
+}
+.navigationContainer {
+  font-weight: bold;
+  font-size: 0.9em;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  padding: 0px 20px 0px 20px;
+  height: 30px;
+  border-radius: 5px;
+  border: 1px solid #b9b9b9;
+}
+.navigationNumberContainer {
+  user-select: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border-right: 1px solid #b9b9b9;
+  height: 100%;
+}
+.navigationNumber {
+  padding: 0px 15px 0px 15px;
+}
+
+.navigationPreviousNumber {
+  padding: 0px 20px 0px 0px;
+}
+
+.navigationNextNumber {
+  border: none;
+  padding: 0px 0px 0px 20px;
+}
