@@ -31,6 +31,7 @@ const ForgotPassword = ({ clearErrors, setLoading, loading, unsetLoading }) => {
   if (isAuthenticated) {
     return <Redirect to={from} />;
   }
+
   const onSubmit = async ({ email }) => {
     setLoading();
     setErrorList(false);

@@ -8,6 +8,7 @@ const Form = forwardRef((props, ref) => {
   const onChange = (e) => {
     setFormValue(e.target.value);
   };
+
   return (
     <div className={className}>
       <label>{label}</label>

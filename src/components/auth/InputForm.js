@@ -2,6 +2,7 @@ import React, { forwardRef } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
+
 import styles from './AuthStyles.module.scss';
 
 const Form = forwardRef((props, ref) => {
