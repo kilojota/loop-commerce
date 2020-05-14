@@ -7,6 +7,9 @@ import { store, persistor } from 'store';
 import flatten from 'flat';
 
 import ProtectedRoutes from 'components/routes/ProtectedRoutes';
+import Navbar from './components/Navbar/Navbar';
+import ProductDetail from './components/products/ProductDetail';
+
 import AppLocale from 'languageProvider';
 
 import 'App.scss';
@@ -14,7 +17,7 @@ import 'App.scss';
 const ForgotPasswordPage = lazy(() => import('components/pages/ForgotPasswordPage'));
 const SignInPage = lazy(() => import('components/pages/SignInPage'));
 const SignUpPage = lazy(() => import('components/pages/SignUpPage'));
-const Home = lazy(() => import('components/Home'));
+const Home = lazy(() => import('components/home/Home'));
 
 const App = () => {
   const [currentLocale, setCurrentLocale] = useState(navigator.language);
@@ -28,8 +31,15 @@ const App = () => {
             <Suspense fallback={<div>Loading...</div>}>
               <Switch>
                 <ProtectedRoutes path='/' exact>
-                  <Home />
+                  <>
+                    <Navbar />
+                    <Home />
+                  </>
                 </ProtectedRoutes>
+                <Route path='/products/:id' exact>
+                  <Navbar />
+                  <ProductDetail />
+                </Route>
                 <Route path='/sign-in'>
                   <SignInPage />
                 </Route>

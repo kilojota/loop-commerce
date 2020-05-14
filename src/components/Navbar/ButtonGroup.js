@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useIntl } from 'react-intl';
-
 import { Link, useHistory } from 'react-router-dom';
 import { useAuthentication } from 'hooks/auth';
 
